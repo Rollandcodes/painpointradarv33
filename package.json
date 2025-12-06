@@ -1,5 +1,17 @@
 {
+  "name": "painpointradar",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@auth/core": "^0.34.3",
     "@supabase/supabase-js": "^2.86.2",
     "axios": "^1.13.2",
@@ -11,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3"
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.0.0"
   }
 }
