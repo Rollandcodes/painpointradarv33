@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { z } from "zod";
-import { authOptions } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { hasActiveSubscription } from "@/lib/subscription";
+import { mockUser } from "@/lib/auth";
 
 const bodySchema = z.object({
   query: z.string().trim().min(1),
@@ -12,15 +10,8 @@ const bodySchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const isAllowed = await hasActiveSubscription(session.user.id);
-    if (!isAllowed) {
-      return NextResponse.json({ error: "Payment Required" }, { status: 402 });
-    }
+    // Using mock user for development (auth disabled)
+    const user = mockUser;
 
     const json = await req.json();
     const parsed = bodySchema.safeParse(json);
@@ -30,8 +21,9 @@ export async function POST(req: Request) {
 
     const { query, painpoints } = parsed.data;
 
+    // Using mock user (auth disabled for development)
     const { error } = await supabase.from("searches").insert({
-      user_id: session.user.id,
+      user_id: user.id,
       query,
       painpoints,
     });
