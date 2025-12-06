@@ -1,3 +1,5 @@
+"use client";
+
 export default function HomePage() {
   return (
     <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(to bottom right, #f8fafc, #e0e7ff, #f8fafc)" }}>
